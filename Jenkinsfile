@@ -52,7 +52,7 @@ pipeline {
 
     post {
         success {
-            emailext subject: '✅ Déploiement réussi',
+            emailext subject: '✅ Déploiement réussi.',
                 body: '''Le build du jour a été un succès 🙏.
                 📌 URL: [Sandbox](https://codeangel223.github.io/sandbox)''',
                 to: 'contact@codeangel.pro'
