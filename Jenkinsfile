@@ -9,16 +9,11 @@ pipeline {
         stage('Recuperation du projet') {
             steps {
                 script {
-                    def branchName = env.BRANCH_NAME
-                    if (branchName == 'main') {
                         git(
                         branch: 'main',
                         credentialsId: '83f74c11-0512-464f-8f76-76d95cfb89dc',
                         url: 'https://github.com/codeangel223/my-sandbox.git'
                     )
-                }else {
-                        error("Ce pipeline ne tourne que sur 'main' 🚫")
-                    }
                 }
             }
         }
