@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    triggers {
-        githubPush()
-    }
-
     stages {
         stage('Recuperation du projet') {
             steps {
@@ -37,14 +33,14 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: '83f74c11-0512-464f-8f76-76d95cfb89dc', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
+                    // withCredentials([usernamePassword(credentialsId: '83f74c11-0512-464f-8f76-76d95cfb89dc', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_PASS')]) {
                         bat """
                 git config --global user.email "codeangel223@gmail.com"
                 git config --global user.name "codeangel223"
                 git remote set-url origin https://$env.GIT_USER:$env.GIT_PASS@github.com/codeangel223/my-sandbox.git
                 npm run deploy
                 """
-                    }
+                    // }
                 }
             }
         }
