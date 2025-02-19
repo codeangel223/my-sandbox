@@ -1,12 +1,13 @@
 {
   "name": "sandbox.codeangel.pro",
   "private": true,
-  "version": "0.0.0",
+  "homepage": "https://codeangel223.github.io/sandbox",
+  "version": "0.1.0",
   "type": "module",
-  
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "deploy": "npx gh-pages -d build --remote origin",
     "lint": "eslint .",
     "preview": "vite preview"
   },
