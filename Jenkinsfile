@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'windows' }  // Spécifie un agent Windows
+    agent any
 
     stages {
         stage('Recuperation du projet') {
