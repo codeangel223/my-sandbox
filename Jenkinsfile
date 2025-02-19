@@ -1,14 +1,17 @@
 pipeline {
-    agent any
+    agent { label 'windows' }  // Spécifie un agent Windows
 
     stages {
         stage('Recuperation du projet') {
             steps {
-                git branch: 'main',
-                credentialsId: '83f74c11-0512-464f-8f76-76d95cfb89dc',
-                url: 'https://github.com/codeangel223/my-sandbox.git'
+                git(
+                    branch: 'main',
+                    credentialsId: '83f74c11-0512-464f-8f76-76d95cfb89dc',
+                    url: 'https://github.com/codeangel223/my-sandbox.git'
+                )
             }
         }
+
         stage('Installation des dependencies') {
             steps {
                 script {
@@ -24,6 +27,7 @@ pipeline {
                 }
             }
         }
+
         stage('Deploy') {
             steps {
                 script {
@@ -32,18 +36,19 @@ pipeline {
             }
         }
     }
+
     post {
         success {
-            emailext subject: 'Deploiement reussi',
-             body: 'Le build du jour a été un success 🙏. Url: https://codeangel223.github.io/sandbox',
-             recipientProviders: ['codeangel223@gmail.com'],
-             to: 'contact@codeangel.pro'
+            emailext subject: '✅ Déploiement réussi',
+                body: '''Le build du jour a été un succès 🙏.
+                📌 URL: [Sandbox](https://codeangel223.github.io/sandbox)''',
+                to: 'contact@codeangel.pro'
         }
         failure {
-            emailext subject: 'Echec du Deploiement',
-             body: 'Le build du jour n a pas pu aboutir, veuillez consulter les logs pls.',
-             recipientProviders: ['codeangel223@gmail.com'],
-             to: 'contact@codeangel.pro'
+            emailext subject: '❌ Échec du déploiement',
+                body: '''Le build du jour n'a pas pu aboutir 😢.
+                Veuillez consulter les logs Jenkins.''',
+                to: 'contact@codeangel.pro'
         }
     }
 }
