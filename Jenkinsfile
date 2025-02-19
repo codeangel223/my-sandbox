@@ -41,6 +41,7 @@ pipeline {
                         bat """
                 git remote set-url origin https://$env.GIT_USER:$env.GIT_PASS@github.com/codeangel223/my-sandbox.git
                 npm run deploy
+
                 """
                     }
                 }
