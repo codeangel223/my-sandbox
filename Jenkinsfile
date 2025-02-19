@@ -4,7 +4,9 @@ pipeline {
     stages {
         stage('Recuperation du projet') {
             steps {
-                git 'https://github.com/codeangel223/my-sandbox.git'
+                git branch: 'main',
+                credentialsId: '83f74c11-0512-464f-8f76-76d95cfb89dc',
+                url: 'https://github.com/codeangel223/my-sandbox.git'
             }
         }
         stage('Installation des dependencies') {
@@ -15,7 +17,7 @@ pipeline {
             }
         }
 
-        stage('build') {
+        stage('Build') {
             steps {
                 script {
                     sh 'npm run build'
